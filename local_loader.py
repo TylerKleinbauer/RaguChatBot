@@ -5,7 +5,7 @@ from pypdf import PdfReader
 from langchain.docstore.document import Document
 from langchain_community.document_loaders import TextLoader
 from langchain_community.document_loaders.csv_loader import CSVLoader
-from langchain_community.document_loaders import PyPDFLoader
+from langchain_community.document_loaders import PyPDFDirectoryLoader
 
 
 def list_txt_files(data_dir="./data"):
@@ -35,7 +35,7 @@ def load_csv_files(data_dir="./data"):
 def load_PDF(data_dir="./data"):
     # Load a PDF document and split it into manageable parts for processing.
     try:
-        loader = PyPDFLoader(data_dir)
+        loader = PyPDFDirectoryLoader(data_dir)
         docs = loader.load_and_split()  # This method splits the PDF into pages.
     except FileNotFoundError as fnf_error:
         raise FileNotFoundError(f"The file at {data_dir} does not exist: {fnf_error}")
